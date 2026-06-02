@@ -61,6 +61,30 @@ app.get("/reservations", async (req, res) => {
   }
 });
 
+// Criar reserva
+app.post("/reservations", async (req, res) => {
+  try {
+    const { user_id, product_id } = req.body;
+
+    const result = await pool.query(
+      `
+      INSERT INTO reservations (user_id, product_id)
+      VALUES ($1, $2)
+      RETURNING *
+      `,
+      [user_id, product_id]
+    );
+
+    res.status(201).json({
+      success: true,
+      message: "Produto reservado com sucesso",
+      reservation: result.rows[0],
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
