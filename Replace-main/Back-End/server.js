@@ -30,6 +30,7 @@ app.get("/health", async (req, res) => {
     });
   }
 });
+
 // Listar usuários
 app.get("/users", async (req, res) => {
   try {
