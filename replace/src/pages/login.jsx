@@ -1,7 +1,7 @@
 import React from 'react';
 import './login.css';
 
-
+/*mnm*/
 import googleLogo from '../assets/google-logo-removebg-preview.png'; 
 
 export default function Login() {
@@ -20,7 +20,7 @@ export default function Login() {
         <p className="login-subtitle">Entre na sua conta para continuar economizando</p>
       </div>
 
-     
+     *
       <div className="login-card">
         <form onSubmit={(e) => e.preventDefault()} className="login-form">
           
