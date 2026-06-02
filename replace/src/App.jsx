@@ -1,7 +1,12 @@
-import Sobre from "./pages/sobre";
+import React from 'react';
+import Login from './pages/login';
 
 function App() {
-  return <Sobre />;
+  return (
+    <>
+      <Login />
+    </>
+  );
 }
 
 export default App;
