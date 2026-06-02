@@ -1,7 +1,7 @@
 import React from 'react';
 import './login.css';
 
-/*mnm*/
+/*mnmd*/
 import googleLogo from '../assets/google-logo-removebg-preview.png'; 
 
 export default function Login() {
