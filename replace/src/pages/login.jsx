@@ -1,13 +1,13 @@
 import React from 'react';
 import './login.css';
 
-// Importando a imagem local com o nome exato que está na sua pasta assets
+
 import googleLogo from '../assets/google-logo-removebg-preview.png'; 
 
 export default function Login() {
   return (
     <div className="login-container">
-      {/* Header / Logo */}
+ 
       <div className="login-header">
         <div className="logo-container">
           <svg className="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -20,11 +20,11 @@ export default function Login() {
         <p className="login-subtitle">Entre na sua conta para continuar economizando</p>
       </div>
 
-      {/* Card do Formulário */}
+     
       <div className="login-card">
         <form onSubmit={(e) => e.preventDefault()} className="login-form">
           
-          {/* Campo E-mail */}
+    
           <div className="input-group">
             <label htmlFor="email">E-mail</label>
             <div className="input-wrapper">
@@ -36,7 +36,7 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Campo Senha */}
+          
           <div className="input-group">
             <label htmlFor="password">Senha</label>
             <div className="input-wrapper">
@@ -48,7 +48,7 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Opções de Lembrar e Esqueci a Senha */}
+         
           <div className="options-row">
             <label className="checkbox-container">
               <input type="checkbox" />
@@ -58,7 +58,7 @@ export default function Login() {
             <a href="#forgot" className="forgot-link">Esqueceu a senha?</a>
           </div>
 
-          {/* Botão Entrar */}
+          
           <button type="submit" className="submit-btn">
             Entrar
             <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -68,12 +68,12 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Divisor */}
+        
         <div className="login-divider">
           <span>ou continue com</span>
         </div>
 
-        {/* Botões Sociais */}
+        
         <div className="social-row">
           <button className="social-btn">
             <img src={googleLogo} alt="Google" />
