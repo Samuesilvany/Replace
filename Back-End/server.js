@@ -31,7 +31,7 @@ app.get("/health", async (req, res) => {
   }
 });
 
-// Listar usuários
+
 app.get("/users", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM users");
@@ -41,7 +41,6 @@ app.get("/users", async (req, res) => {
   }
 });
 
-// Listar produtos
 app.get("/products", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM products");
@@ -51,7 +50,7 @@ app.get("/products", async (req, res) => {
   }
 });
 
-// Listar reservas
+
 app.get("/reservations", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM reservations");
