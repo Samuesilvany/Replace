@@ -1,112 +1,116 @@
-import "./Produtos.css";
+import React, { useState } from "react";
+
+const dbProdutos = [
+  { 
+    id: 1, 
+    nome: "Filé de Frango", 
+    desc: "Resfriado e em embalagem higienizada", 
+    precoAntigo: 25.00, 
+    precoNovo: 16.25, 
+    validade: "03/06/2026", 
+    cat: "Carnes", 
+    img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=500&q=80" 
+  },
+  { 
+    id: 2, 
+    nome: "Cenoura", 
+    desc: "Perfeita para saladas e sucos saudáveis", 
+    precoAntigo: 7.00, 
+    precoNovo: 4.90, 
+    validade: "04/06/2026", 
+    cat: "Hortifrúti", 
+    /* IMAGEM DA CENOURA REAL E BEM LARANJA */
+    img: "https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=500&q=80" 
+  },
+  { 
+    id: 3, 
+    nome: "Batata Inglesa", 
+    desc: "Selecionada e limpa para consumo imediato", 
+    precoAntigo: 9.00, 
+    precoNovo: 6.75, 
+    validade: "05/06/2026", 
+    cat: "Hortifrúti", 
+    img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=500&q=80" 
+  },
+  { 
+    id: 4, 
+    nome: "Maçã Gala", 
+    desc: "Doce, crocante e rica em vitaminas", 
+    precoAntigo: 12.00, 
+    precoNovo: 8.40, 
+    validade: "04/06/2026", 
+    cat: "Hortifrúti", 
+    img: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=500&q=80" 
+  },
+  { 
+    id: 5, 
+    nome: "Iogurte Natural", 
+    desc: "Laticínio cremoso ideal para misturas", 
+    precoAntigo: 10.00, 
+    precoNovo: 5.00, 
+    validade: "05/06/2026", 
+    cat: "Laticínios", 
+    img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=500&q=80" 
+  }
+];
 
 export default function Produtos() {
-  const listaProdutos = [
-    {
-      id: 1,
-      nome: "Iogurte Natural",
-      peso: "500g",
-      precoAntigo: "R$ 12,90",
-      precoAtual: "R$ 3,87",
-      desconto: "-70%",
-      validade: "Vence amanhã",
-      imagem: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      id: 2,
-      nome: "Filé de Frango",
-      peso: "1kg",
-      precoAntigo: "R$ 24,90",
-      precoAtual: "R$ 9,96",
-      desconto: "-60%",
-      validade: "Vence amanhã",
-      imagem: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      id: 3,
-      nome: "Queijo Mussarela",
-      peso: "500g",
-      precoAntigo: "R$ 32,90",
-      precoAtual: "R$ 11,52",
-      desconto: "-65%",
-      validade: "Vence amanhã",
-      // LINK CORRIGIDO: Imagem real de queijo fresco!
-      imagem: "https://images.unsplash.com/photo-1552763440-47448db7eae9?auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      id: 4,
-      nome: "Tomate Salada",
-      peso: "1kg",
-      precoAntigo: "R$ 9,90",
-      precoAtual: "R$ 4,95",
-      desconto: "-50%",
-      validade: "Vence amanhã",
-      imagem: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80"
-    }
-  ];
+  const [focoId, setFocoId] = useState(null);
 
   return (
-    <div className="produtos-page">
+    <div style={{ padding: "40px", maxWidth: "1100px", margin: "0 auto" }}>
+      <h2 style={{ fontSize: "2rem", color: "#0f172a", marginBottom: "8px", fontWeight: "700", textAlign: "center" }}>Ofertas Disponíveis</h2>
+      <p style={{ color: "#64748b", marginBottom: "40px", textAlign: "center" }}>Passe o mouse por cima para ver a aproximação e detalhes do alimento.</p>
       
-      {/* NAVBAR */}
-      <header className="navbar-produtos">
-        <div className="logo-prod">
-          <div className="logo-icon-prod">🍃</div>
-          <h2>Replace</h2>
-        </div>
-        <nav className="nav-prod">
-          <a href="#inicio">Início</a>
-          <a href="#produtos" className="active">Produtos</a>
-          <a href="#mercados">Mercados</a>
-          <a href="#como-funciona">Como funciona</a>
-          <a href="#sobre">Sobre</a>
-        </nav>
-        <div className="nav-buttons-prod">
-          <button className="login-btn-prod">Entrar</button>
-          <button className="register-btn-prod">Cadastrar</button>
-        </div>
-      </header>
+      {/* GRID AJUSTADO PARA CARDS MAIS COMPACTOS */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "24px" }}>
+        {dbProdutos.map((p) => {
+          const ativo = focoId === p.id;
+          const pct = Math.round(((p.precoAntigo - p.precoNovo) / p.precoAntigo) * 100);
 
-      {/* TITULO CENTRAL */}
-      <section className="produtos-hero">
-        <h1>Ofertas disponíveis</h1>
-        <p>Produtos frescos com grandes descontos</p>
-      </section>
-
-      {/* GRID DE PRODUTOS */}
-      <main className="produtos-container">
-        <div className="produtos-grid">
-          {listaProdutos.map((produto) => (
-            <div key={produto.id} className="produto-card">
-              
-              <div className="card-image-wrapper">
-                <span className="badge-desconto">{produto.desconto}</span>
-                <img src={produto.imagem} alt={produto.nome} />
+          return (
+            <div 
+              key={p.id}
+              onMouseEnter={() => setFocoId(p.id)}
+              onMouseLeave={() => setFocoId(null)}
+              style={{ 
+                background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", overflow: "hidden",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                transform: ativo ? "scale(1.03) translateY(-4px)" : "scale(1) translateY(0)",
+                boxShadow: ativo ? "0 12px 20px rgba(0,0,0,0.06)" : "0 2px 4px rgba(0,0,0,0.01)"
+              }}
+            >
+              {/* CONTAINER DA FOTO MENOR E CONTROLADA */}
+              <div style={{ width: "100%", height: "145px", overflow: "hidden", position: "relative", backgroundColor: "#f8fafc" }}>
+                <span style={{ position: "absolute", top: "10px", right: "10px", background: "#ef4444", color: "white", padding: "3px 8px", borderRadius: "12px", fontSize: "0.75rem", fontWeight: "700", zIndex: 2 }}>
+                  -{pct}%
+                </span>
+                <img 
+                  src={p.img} 
+                  alt={p.nome} 
+                  style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.3s ease", transform: ativo ? "scale(1.1)" : "scale(1)" }} 
+                />
               </div>
 
-              <div className="card-info">
-                <h3>{produto.nome}</h3>
-                <span className="produto-peso">{produto.peso}</span>
+              {/* TEXTOS DO CARD */}
+              <div style={{ padding: "16px", textAlign: "center" }}>
+                <span style={{ fontSize: "0.7rem", color: "#22c55e", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.5px" }}>{p.cat}</span>
+                <h3 style={{ fontSize: "1.15rem", margin: "4px 0 8px 0", color: "#1e293b", fontWeight: "700" }}>{p.nome}</h3>
+                <p style={{ fontSize: "0.85rem", color: "#64748b", margin: "0 0 14px 0", minHeight: "34px", lineHeight: "1.4" }}>{p.desc}</p>
                 
-                <div className="precos-wrapper">
-                  <span className="preco-antigo">{produto.precoAntigo}</span>
-                  <span className="preco-atual">{produto.precoAtual}</span>
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "8px", marginBottom: "14px" }}>
+                  <span style={{ fontSize: "0.85rem", textDecoration: "line-through", color: "#94a3b8" }}>R$ {p.precoAntigo.toFixed(2)}</span>
+                  <span style={{ fontSize: "1.25rem", fontWeight: "700", color: "#16a34a" }}>R$ {p.precoNovo.toFixed(2)}</span>
                 </div>
-
-                <div className="validade-tag">
-                  {produto.validade}
+                
+                <div style={{ borderTop: "1px solid #f1f5f9", paddingTop: "10px", fontSize: "0.8rem", color: "#64748b" }}>
+                  <strong>Vence em:</strong> {p.validade}
                 </div>
-
-                <button className="btn-reservar">
-                  Reservar
-                </button>
               </div>
-
             </div>
-          ))}
-        </div>
-      </main>
-
+          );
+        })}
+      </div>
     </div>
   );
 }
