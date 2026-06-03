@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 
 import googleLogo from "../assets/google-logo-removebg-preview.png";
+import { AuthContext } from "../auth/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const form = e.currentTarget;
+    const email = form.email?.value;
+    const senha = form.password?.value;
+
+    const usuario = {
+      email: email || "",
+      // senha não é uma boa prática salvar no mundo real;
+      // aqui só garantimos que existe um objeto para persistir.
+      senha: senha || "",
+    };
+
+    auth.login(usuario);
     navigate("/");
   };
 
@@ -49,7 +64,12 @@ export default function Login() {
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,13 2,6" />
               </svg>
-              <input type="email" id="email" placeholder="seu@email.com" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="seu@email.com"
+              />
             </div>
           </div>
 
@@ -66,7 +86,12 @@ export default function Login() {
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
-              <input type="password" id="password" placeholder="••••••••" />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+              />
             </div>
           </div>
 

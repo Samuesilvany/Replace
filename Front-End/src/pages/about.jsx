@@ -1,7 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
 import logo from "../assets/Logo-replace.jpg";
 import "./about.css";
+import { AuthContext } from "../auth/AuthContext";
 function About() {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+  const usuarioLogado = auth?.usuario;
+
   return (
     <div className="sobre-page">
       <header className="navbar">
@@ -17,12 +23,27 @@ function About() {
         </nav>
 
         <div className="actions">
-          <Link to="/login" className="btn-login">
-            Entrar
-          </Link>
-          <Link to="/cadastro" className="btn-register">
-            Cadastrar
-          </Link>
+          {usuarioLogado ? (
+            <button
+              type="button"
+              className="btn-login"
+              onClick={() => {
+                auth.logout();
+                navigate("/");
+              }}
+            >
+              Sair
+            </button>
+          ) : (
+            <>
+              <Link to="/login" className="btn-login">
+                Entrar
+              </Link>
+              <Link to="/cadastro" className="btn-register">
+                Cadastrar
+              </Link>
+            </>
+          )}
         </div>
       </header>
 
