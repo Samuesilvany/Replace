@@ -2,8 +2,6 @@ import React from "react";
 import "./Home.css";
 
 import heroImg from "../assets/hero.png";
-
-// Caso o logo desejado exista como asset, reutilizamos o que já existe no projeto.
 import googleLogo from "../assets/google-logo-removebg-preview.png";
 
 export default function Home() {
@@ -12,7 +10,8 @@ export default function Home() {
       <header className="home-header">
         <div className="home-header__inner">
           <div className="home-logo" aria-label="Replace">
-            <span className="home-logo__mark">🍃</span>
+            {/* Logo oficial deve estar em assets; por enquanto reaproveitamos o asset existente */}
+            <img className="home-logo__img" src={googleLogo} alt="Replace" />
             <span className="home-logo__text">Replace</span>
           </div>
 
@@ -48,10 +47,16 @@ export default function Home() {
               <h1 className="home-hero__title">
                 Evite desperdícios. Economize todos os dias.
               </h1>
+
               <p className="home-hero__subtitle">
                 Produtos próximos da validade com grandes descontos. Bom para
                 você, ótimo para o planeta.
               </p>
+
+              <div className="home-hero__selo">
+                <span className="home-hero__selo-icon">🌱</span>
+                Sustentabilidade e economia em um só lugar
+              </div>
 
               <div className="home-hero__cta">
                 <button className="home-btn home-btn--primary">
@@ -67,14 +72,7 @@ export default function Home() {
 
             <div className="home-hero__media" aria-label="Destaque de desconto">
               <div className="discount-badge">-70%</div>
-              <img
-                className="home-hero__img"
-                src={heroImg}
-                alt="Desconto nos produtos"
-              />
-
-              {/* imagem extra reaproveitada para evitar layout vazio caso heroImg não carregue */}
-              <img className="home-hero__fallback" src={googleLogo} alt="" />
+              <img className="home-hero__img" src={heroImg} alt="Desconto" />
             </div>
           </div>
         </section>
@@ -153,56 +151,26 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="home-products" id="produtos">
+        <section className="home-impact" id="impacto">
           <div className="home-section__inner">
-            <h2 className="home-section__title">Produtos em destaque</h2>
-            <div className="home-products__grid">
-              <div className="product-card">
-                <div className="product-card__top">
-                  <div className="product-card__name">Pão Francês</div>
-                  <div className="product-card__tag">-40%</div>
-                </div>
-                <div className="product-card__prices">
-                  <span className="product-card__original">R$ 7,90</span>
-                  <span className="product-card__final">R$ 4,74</span>
-                </div>
-                <div className="product-card__valid">Validade: hoje</div>
+            <h2 className="home-section__title">Gerando impacto positivo</h2>
+            <div className="home-impact__grid">
+              <div className="impact-card">
+                <div className="impact-card__icon">♻️</div>
+                <div className="impact-card__value">1.200kg</div>
+                <div className="impact-card__label">reaproveitados</div>
               </div>
 
-              <div className="product-card">
-                <div className="product-card__top">
-                  <div className="product-card__name">Banana Prata</div>
-                  <div className="product-card__tag">-55%</div>
-                </div>
-                <div className="product-card__prices">
-                  <span className="product-card__original">R$ 8,50</span>
-                  <span className="product-card__final">R$ 3,83</span>
-                </div>
-                <div className="product-card__valid">Validade: amanhã</div>
+              <div className="impact-card">
+                <div className="impact-card__icon">🏪</div>
+                <div className="impact-card__value">25</div>
+                <div className="impact-card__label">mercados parceiros</div>
               </div>
 
-              <div className="product-card">
-                <div className="product-card__top">
-                  <div className="product-card__name">Iogurte Natural</div>
-                  <div className="product-card__tag">-30%</div>
-                </div>
-                <div className="product-card__prices">
-                  <span className="product-card__original">R$ 6,20</span>
-                  <span className="product-card__final">R$ 4,34</span>
-                </div>
-                <div className="product-card__valid">Validade: 2 dias</div>
-              </div>
-
-              <div className="product-card">
-                <div className="product-card__top">
-                  <div className="product-card__name">Carne Moída</div>
-                  <div className="product-card__tag">-25%</div>
-                </div>
-                <div className="product-card__prices">
-                  <span className="product-card__original">R$ 26,90</span>
-                  <span className="product-card__final">R$ 20,18</span>
-                </div>
-                <div className="product-card__valid">Validade: 3 dias</div>
+              <div className="impact-card">
+                <div className="impact-card__icon">💚</div>
+                <div className="impact-card__value">R$ 8.500</div>
+                <div className="impact-card__label">economizados</div>
               </div>
             </div>
           </div>
