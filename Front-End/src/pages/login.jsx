@@ -1,10 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 
-// Mantém o asset na estrutura atual (Front-End/src/assets)
 import googleLogo from "../assets/google-logo-removebg-preview.png";
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
+
   return (
     <div className="login-container">
       <div className="login-header">
@@ -27,10 +34,8 @@ export default function Login() {
         </p>
       </div>
 
-      {/* OBS: removido caractere solto "*" que existia no arquivo original */}
-
       <div className="login-card">
-        <form onSubmit={(e) => e.preventDefault()} className="login-form">
+        <form onSubmit={handleSubmit} className="login-form">
           <div className="input-group">
             <label htmlFor="email">E-mail</label>
             <div className="input-wrapper">

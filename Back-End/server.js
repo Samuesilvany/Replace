@@ -6,11 +6,11 @@ const app = express();
 app.use(express.json());
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "Replace",
-  password: "senai",
-  port: 5432,
+  user: process.env.DB_USER || "postgres",
+  host: process.env.DB_HOST || "localhost",
+  database: process.env.DB_NAME || "Replace",
+  password: process.env.DB_PASSWORD || "senai",
+  port: Number(process.env.DB_PORT || 5432),
 });
 
 app.get("/health", async (req, res) => {
@@ -19,18 +19,17 @@ app.get("/health", async (req, res) => {
 
     res.status(200).json({
       status: "ok",
-      db: result.rows?.[0]?.ok ?? 1
+      db: result.rows?.[0]?.ok ?? 1,
     });
   } catch (err) {
     console.error(err);
 
     res.status(500).json({
       status: "error",
-      message: err.message
+      message: err.message,
     });
   }
 });
-
 
 app.get("/users", async (req, res) => {
   try {
@@ -49,7 +48,6 @@ app.get("/products", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 app.get("/reservations", async (req, res) => {
   try {
@@ -71,7 +69,7 @@ app.post("/reservations", async (req, res) => {
       VALUES ($1, $2)
       RETURNING *
       `,
-      [user_id, product_id]
+      [user_id, product_id],
     );
 
     res.status(201).json({
