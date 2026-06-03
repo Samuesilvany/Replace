@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import About from "./pages/about";
 import Cadastro from "./pages/Cadastro";
 import Produtos from "./pages/Produtos";
+import Reservas from "./pages/Reservas";
 
 import { AuthProvider } from "./auth/AuthContext";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -32,6 +33,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/reservas" element={<Reservas />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>

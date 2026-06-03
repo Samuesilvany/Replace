@@ -22,6 +22,7 @@ function Home() {
         <nav>
           <Link to="/">Início</Link>
           <Link to="/produtos">Produtos</Link>
+          <Link to="/reservas">Reservas</Link>
           <Link to="/about">Sobre</Link>
         </nav>
 

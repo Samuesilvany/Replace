@@ -1,7 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo-replace.jpg";
 import { AuthContext } from "../auth/AuthContext";
+
+const STORAGE_KEY = "reservas";
 
 const dbProdutos = [
   {
@@ -62,6 +64,14 @@ export default function Produtos() {
   const navigate = useNavigate();
   const usuarioLogado = auth?.usuario;
 
+  const reservasAtuais = useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }, []);
+
   return (
     <div>
       <header
@@ -113,6 +123,17 @@ export default function Produtos() {
             }}
           >
             Produtos
+          </Link>
+          <Link
+            to="/reservas"
+            style={{
+              textDecoration: "none",
+              color: "#16a34a",
+              fontSize: "19px",
+              fontWeight: 700,
+            }}
+          >
+            Reservas
           </Link>
           <Link
             to="/about"
@@ -346,6 +367,63 @@ export default function Produtos() {
                   >
                     <strong>Vence em:</strong> {p.validade}
                   </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!usuarioLogado) {
+                        navigate("/login");
+                        return;
+                      }
+
+                      const atuais = (() => {
+                        try {
+                          return (
+                            JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+                          );
+                        } catch {
+                          return [];
+                        }
+                      })();
+
+                      const jaReservado = atuais.some((x) => x.id === p.id);
+                      if (jaReservado) return;
+
+                      const precoComDesconto = p.precoNovo;
+                      const precoOriginal = p.precoAntigo;
+                      const porcentagemDesconto = Math.round(
+                        ((precoOriginal - precoComDesconto) / precoOriginal) *
+                          100,
+                      );
+
+                      const item = {
+                        id: p.id,
+                        nome: p.nome,
+                        categoria: p.cat,
+                        imagem: p.img,
+                        precoOriginal,
+                        precoComDesconto,
+                        porcentagemDesconto,
+                        dataDeVencimento: p.validade,
+                      };
+
+                      const prox = [...atuais, item];
+                      localStorage.setItem(STORAGE_KEY, JSON.stringify(prox));
+                    }}
+                    style={{
+                      marginTop: "14px",
+                      width: "100%",
+                      padding: "12px 14px",
+                      borderRadius: "12px",
+                      border: "1px solid #16a34a",
+                      background: "#16a34a",
+                      color: "white",
+                      fontWeight: 800,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Reservar
+                  </button>
                 </div>
               </div>
             );
