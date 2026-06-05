@@ -27,7 +27,7 @@ export default function Reservas() {
   const usuarioLogado = auth?.usuario;
 
   const [reservas, setReservas] = useState([]);
-  const [mensagem, setMensagem] = useState("");
+  const [toast, setToast] = useState({ show: false, message: "" });
 
   useEffect(() => {
     setReservas(lerReservas());
@@ -36,21 +36,22 @@ export default function Reservas() {
   const hasReservas = useMemo(() => reservas.length > 0, [reservas]);
 
   const cancelarReserva = (id) => {
+    const item = reservas.find((r) => r.id === id);
+    const nomeItem = item ? item.nome : "Produto";
     const prox = removerReservaPorId(id);
     setReservas(prox);
-    setMensagem("Reserva cancelada com sucesso");
+    setToast({ show: true, message: `Reserva de "${nomeItem}" cancelada.` });
 
-    // limpa mensagem após alguns segundos
-    window.clearTimeout(window.__replaceReservaTimeout);
-    window.__replaceReservaTimeout = window.setTimeout(() => {
-      setMensagem("");
+    window.clearTimeout(window.__replaceToastTimeout);
+    window.__replaceToastTimeout = window.setTimeout(() => {
+      setToast({ show: false, message: "" });
     }, 3000);
   };
 
   return (
     <div className="reservas-page">
       <header className="navbar reservas-navbar">
-        <div className="brand">
+        <Link to="/" className="brand" style={{ textDecoration: "none" }}>
           <div className="logo-box">
             <img
               src={logo}
@@ -60,7 +61,7 @@ export default function Reservas() {
             />
           </div>
           <span>Replace</span>
-        </div>
+        </Link>
 
         <nav>
           <Link to="/" className="nav-link">
@@ -103,7 +104,6 @@ export default function Reservas() {
 
       <main className="reservas-main">
         <h2 className="reservas-title">Suas Reservas</h2>
-        {mensagem ? <div className="reservas-alert">{mensagem}</div> : null}
 
         {!hasReservas ? (
           <div className="reservas-empty">
@@ -168,6 +168,13 @@ export default function Reservas() {
           </div>
         )}
       </main>
+
+      {toast.show && (
+        <div className="toast-container-cancel">
+          <span className="toast-icon">⚠️</span>
+          <span>{toast.message}</span>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './DashboardMercado.css';
 
 export default function DashboardMercado() {
-  // Estado para controlar a alternância de tema (false = claro, true = escuro)
+ 
   const [darkMode, setDarkMode] = useState(false);
-  // Estado para controlar a exibição dos produtos reservados (exemplo para futura lógica)
+
   const [showReserved, setShowReserved] = useState(false);
 
   const toggleTheme = () => {
@@ -13,17 +13,17 @@ export default function DashboardMercado() {
 
   const handleToggleReserved = () => {
     setShowReserved(!showReserved);
-    // Aqui podes adicionar a lógica para abrir um modal ou filtrar a lista no futuro
+    
     alert("Função para mostrar produtos reservados ativada!");
   };
 
   return (
     <div className={`dashboard-wrapper ${darkMode ? 'dark-theme' : ''}`}>
-      {/* Menu Superior */}
+    
       <nav className="navbar">
         <div className="navbar-left">
           <div className="brand">
-            {/* Nova Logo: Folha dentro do quadrado verde arredondado */}
+           
             <svg className="brand-icon-container" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="40" height="40" rx="12" fill="#2ecc71"/>
               <path d="M28 14C24 14 16 16 14 22C13.5 23.5 13.5 25.5 15 26.5C16.5 27.5 19 27 20.5 26C25.5 22.5 27 16 28 14Z" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -55,14 +55,14 @@ export default function DashboardMercado() {
         </div>
       </nav>
 
-      {/* Conteúdo Principal */}
+     
       <main className="dashboard-container">
         <header className="welcome-section">
           <h1>Bom dia, Mercado Catarinense</h1>
           <p>Hoje você recuperou <strong>R$ 482,00</strong> em produtos que seriam descartados.</p>
         </header>
 
-        {/* Grade de Métricas */}
+       
         <section className="metrics-grid">
           <div className="metric-card">
             <span className="metric-title">Receita Recuperada</span>
@@ -82,7 +82,7 @@ export default function DashboardMercado() {
             <span className="metric-sub text-custom-white">18 pedidos hoje</span>
           </div>
 
-          {/* Nova Métrica: Produtos Reservados */}
+         
           <div className="metric-card card-reserved" onClick={handleToggleReserved}>
             <span className="metric-title">Produtos Reservados</span>
             <div className="metric-value">12</div>
@@ -96,11 +96,11 @@ export default function DashboardMercado() {
           </div>
         </section>
 
-        {/* Lista de Alertas */}
+     
         <section className="alerts-section">
           <div className="alerts-header">
             <h2>Vencendo em Breve</h2>
-            {/* Botão Global para mostrar o que está reservado */}
+           
             <button className="btn-view-reserved" onClick={handleToggleReserved}>
               📋 Ver Todos os Reservados
             </button>

@@ -12,12 +12,12 @@ function Home() {
   return (
     <div className="home">
       <header className="navbar">
-        <div className="brand">
+        <Link to="/" className="logo">
           <div className="logo-box">
             <img src={logo} alt="Replace" className="logo-img" />
           </div>
           <span>Replace</span>
-        </div>
+        </Link>
 
         <nav>
           <Link to="/">Início</Link>
@@ -73,9 +73,11 @@ function Home() {
                 Ver ofertas
               </Link>
 
-              <Link to="/mercados" className="btn-outline">
-                Sou um mercado
-              </Link>
+              {!usuarioLogado && (
+                <Link to="/mercados" className="btn-outline">
+                  Sou um mercado
+                </Link>
+              )}
             </div>
           </div>
 
@@ -128,6 +130,58 @@ function Home() {
               <span>3</span>
               <h3>Produtos são aproveitados</h3>
               <p>O alimento chega a quem vai consumir.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="dashboard-advantages">
+          <div className="advantages-container">
+            <div className="advantages-text">
+              <span className="tag-green">Dashboard Exclusivo</span>
+              <h2>Gerencie seu mercado de forma inteligente</h2>
+              <p>
+                Com o painel do Replace, seu estabelecimento tem controle total sobre o estoque próximo do vencimento e o impacto gerado.
+              </p>
+              <ul className="advantages-list">
+                <li>
+                  <strong>Métricas em Tempo Real:</strong> Acompanhe a receita recuperada e o peso de alimentos salvos do descarte.
+                </li>
+                <li>
+                  <strong>Cadastro Ultrarrápido:</strong> Adicione produtos e crie promoções automáticas em segundos.
+                </li>
+                <li>
+                  <strong>Alertas de Criticidade:</strong> Receba avisos inteligentes sobre quais itens precisam de promoção urgente.
+                </li>
+                <li>
+                  <strong>Controle de Reservas:</strong> Visualize quais produtos já foram reservados e aguardam retirada.
+                </li>
+              </ul>
+            </div>
+            <div className="advantages-preview">
+              <div className="preview-card">
+                <div className="preview-header">
+                  <span className="dot red"></span>
+                  <span className="dot yellow"></span>
+                  <span className="dot green"></span>
+                  <span className="preview-title">replace-dashboard.png</span>
+                </div>
+                <div className="preview-body">
+                  <div className="body-metric">
+                    <span className="metric-label">Receita Recuperada</span>
+                    <span className="metric-val">R$ 12.450</span>
+                  </div>
+                  <div className="body-alerts">
+                    <div className="alert-item">
+                      <span>Tomate (18 un)</span>
+                      <span className="badge-red">Crítico</span>
+                    </div>
+                    <div className="alert-item">
+                      <span>Filé de Frango (5 un)</span>
+                      <span className="badge-green">Reservado</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

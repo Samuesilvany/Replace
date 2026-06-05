@@ -65,19 +65,15 @@ function About() {
           </div>
         </section>
 
-        <section className="history">
-          <h2>Nossa história</h2>
-          <p>
-            A Replace nasceu de uma constatação alarmante: milhões de toneladas
-            de alimentos são desperdiçadas todos os anos, enquanto muitas
-            pessoas buscam economia e produtos de qualidade com preços
-            acessíveis.
-          </p>
-        </section>
-
         <section className="info-grid">
           <div className="info-card">
-            <div className="card-icon">🎯</div>
+            <div className="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "34px", height: "34px" }}>
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </div>
             <h3>Nossa Missão</h3>
             <p>
               Reduzir o desperdício de alimentos conectando consumidores
@@ -86,7 +82,12 @@ function About() {
           </div>
 
           <div className="info-card">
-            <div className="card-icon">🚀</div>
+            <div className="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "34px", height: "34px" }}>
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+              </svg>
+            </div>
             <h3>Nossa Visão</h3>
             <p>
               Ser a maior plataforma de combate ao desperdício de alimentos do
@@ -95,7 +96,11 @@ function About() {
           </div>
 
           <div className="info-card">
-            <div className="card-icon">💚</div>
+            <div className="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "34px", height: "34px" }}>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
             <h3>Nossos Valores</h3>
             <ul>
               <li>Sustentabilidade em primeiro lugar</li>

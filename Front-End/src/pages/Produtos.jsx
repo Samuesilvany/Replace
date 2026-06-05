@@ -2,6 +2,7 @@ import React, { useContext, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo-replace.jpg";
 import { AuthContext } from "../auth/AuthContext";
+import "./Produtos.css";
 
 const STORAGE_KEY = "reservas";
 
@@ -63,6 +64,7 @@ export default function Produtos() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const usuarioLogado = auth?.usuario;
+  const [toast, setToast] = useState({ show: false, message: "" });
 
   const reservasAtuais = useMemo(() => {
     try {
@@ -85,9 +87,15 @@ export default function Produtos() {
           justifyContent: "space-between",
         }}
       >
-        <div
+        <Link
+          to="/"
           className="brand"
-          style={{ display: "flex", alignItems: "center", gap: "12px" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            textDecoration: "none",
+          }}
         >
           <div className="logo-box">
             <img
@@ -99,7 +107,7 @@ export default function Produtos() {
           <span style={{ fontSize: "30px", fontWeight: 800, color: "#0f172a" }}>
             Replace
           </span>
-        </div>
+        </Link>
 
         <nav style={{ display: "flex", gap: "32px" }}>
           <Link
@@ -117,9 +125,9 @@ export default function Produtos() {
             to="/produtos"
             style={{
               textDecoration: "none",
-              color: "#0f172a",
+              color: "#16a34a",
               fontSize: "19px",
-              fontWeight: 500,
+              fontWeight: 700,
             }}
           >
             Produtos
@@ -128,9 +136,9 @@ export default function Produtos() {
             to="/reservas"
             style={{
               textDecoration: "none",
-              color: "#16a34a",
+              color: "#0f172a",
               fontSize: "19px",
-              fontWeight: 700,
+              fontWeight: 500,
             }}
           >
             Reservas
@@ -387,7 +395,14 @@ export default function Produtos() {
                       })();
 
                       const jaReservado = atuais.some((x) => x.id === p.id);
-                      if (jaReservado) return;
+                      if (jaReservado) {
+                        setToast({ show: true, message: `O produto "${p.nome}" já está reservado!` });
+                        window.clearTimeout(window.__replaceToastTimeout);
+                        window.__replaceToastTimeout = window.setTimeout(() => {
+                          setToast({ show: false, message: "" });
+                        }, 3000);
+                        return;
+                      }
 
                       const precoComDesconto = p.precoNovo;
                       const precoOriginal = p.precoAntigo;
@@ -409,6 +424,12 @@ export default function Produtos() {
 
                       const prox = [...atuais, item];
                       localStorage.setItem(STORAGE_KEY, JSON.stringify(prox));
+
+                      setToast({ show: true, message: `Reserva de "${p.nome}" realizada com sucesso!` });
+                      window.clearTimeout(window.__replaceToastTimeout);
+                      window.__replaceToastTimeout = window.setTimeout(() => {
+                        setToast({ show: false, message: "" });
+                      }, 3000);
                     }}
                     style={{
                       marginTop: "14px",
@@ -430,6 +451,13 @@ export default function Produtos() {
           })}
         </div>
       </div>
+
+      {toast.show && (
+        <div className="toast-container">
+          <span className="toast-icon">✅</span>
+          <span>{toast.message}</span>
+        </div>
+      )}
     </div>
   );
 }

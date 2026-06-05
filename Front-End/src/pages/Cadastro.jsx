@@ -17,9 +17,15 @@ export default function Cadastro() {
     const email = form.email?.value;
     const confirmarEmail = form.confirmEmail?.value;
     const senha = form.password?.value;
+    const confirmarSenha = form.confirmPassword?.value;
 
     if ((email || "") !== (confirmarEmail || "")) {
       alert("Os e-mails não coincidem");
+      return;
+    }
+
+    if ((senha || "") !== (confirmarSenha || "")) {
+      alert("As senhas não coincidem");
       return;
     }
 
@@ -30,7 +36,7 @@ export default function Cadastro() {
       tipoConta,
     };
 
-    auth.login(usuario);
+    // Não loga o usuário automaticamente; apenas redireciona para a tela de login
     navigate("/login");
   };
 
@@ -301,27 +307,32 @@ export default function Cadastro() {
               style={{
                 borderTop: "1px solid #f1f5f9",
                 paddingTop: "12px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "18px",
               }}
             >
-              <label style={estiloLabel}>E-mail de acesso</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="seu@email.com"
-                required
-                style={estiloInput}
-              />
+              <div>
+                <label style={estiloLabel}>E-mail de acesso</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="seu@email.com"
+                  required
+                  style={estiloInput}
+                />
+              </div>
 
-              <label style={{ ...estiloLabel, marginTop: "12px" }}>
-                Confirmar e-mail
-              </label>
-              <input
-                type="email"
-                name="confirmEmail"
-                placeholder="confirme seu@email.com"
-                required
-                style={estiloInput}
-              />
+              <div>
+                <label style={estiloLabel}>Confirmar e-mail</label>
+                <input
+                  type="email"
+                  name="confirmEmail"
+                  placeholder="confirme seu@email.com"
+                  required
+                  style={estiloInput}
+                />
+              </div>
             </div>
 
             <div>
@@ -329,6 +340,19 @@ export default function Cadastro() {
               <input
                 type="password"
                 name="password"
+                placeholder="••••••••"
+                required
+                style={estiloInput}
+              />
+            </div>
+
+            <div>
+              <label style={{ ...estiloLabel, marginTop: "12px" }}>
+                Confirmar senha
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
                 placeholder="••••••••"
                 required
                 style={estiloInput}
@@ -349,7 +373,7 @@ export default function Cadastro() {
                 marginTop: "10px",
               }}
             >
-              Criar minha conta
+              Cadastrar
             </button>
           </form>
 
